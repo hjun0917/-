@@ -21,9 +21,12 @@ public class HellobootApplication {
         WebServer webServer = serverFactory.getWebServer(servletContext -> {
             GenericApplicationContext applicationContext = new GenericApplicationContext();
             /*
-            bean 을 등록하고, 구성정보를 가지고 spring container 를 초기화
+            interface 의 구현체를 bean 으로 등록
+            spring container 의 assembler 가 해당 interface 의 구현체를 필요로 하는 곳에 주입
+            순서는 상관 x, spring container 가 알아서 관리해준다.
              */
             applicationContext.registerBean(HelloController.class);
+            applicationContext.registerBean(SimpleHelloService.class);
             applicationContext.refresh();
 
 
